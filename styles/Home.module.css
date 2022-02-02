@@ -16,6 +16,7 @@
 .command {
   color: white;
   margin: 5px 0;
+  font-size: 15px;
 }
 .commandinput {
   width: 100%;
@@ -26,6 +27,7 @@
   border: none;
   color: white;
   outline: none;
+  font-size: 15px;
 }
 .footer {
   display: flex;

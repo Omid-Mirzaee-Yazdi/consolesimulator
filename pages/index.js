@@ -14,16 +14,30 @@ export default function Home() {
   useEffect(() => {
     setrunning(false);
   }, []);
-  const commandinpchange = (e) => {
+  const commandInpChange = (e) => {
     if (e.target.value.substr(0, initial.length) === initial) {
       setcommandvalue(e.target.value);
     }
   };
-
-  const onEnterPress = (e) => {
-    if (e.keyCode == 13 && e.shiftKey == false) {
+  const sendCommand = async (e) => {
+    if (e.keyCode == 13) {
+      setrunning(true);
       e.preventDefault();
       setlines((prev) => [...prev, e.target.value]);
+      const command = e.target.value.substr(initial.length).trim();
+      setcommandvalue(initial);
+      const fetchCommands = await fetch("./api/commands");
+      const fetchCommandsJson = await fetchCommands.json();
+      const filteredjson = await fetchCommandsJson.filter(
+        (item) => item.command === command
+      );
+      console.log(filteredjson);
+      if (filteredjson.length > 0) {
+        filteredjson.function;
+      } else {
+        setlines((prev) => [...prev, command + " was not found!"]);
+      }
+      setrunning(false);
     }
   };
 
@@ -46,10 +60,11 @@ export default function Home() {
         ))}
         {!running && (
           <textarea
+            spellCheck="false"
             value={commandvalue}
-            onChange={commandinpchange}
+            onChange={commandInpChange}
             className={styles.commandinput}
-            onKeyDown={onEnterPress}
+            onKeyDown={sendCommand}
           ></textarea>
         )}
       </main>
