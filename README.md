@@ -1,5 +1,4 @@
-This is an educational project, built by [Omid Miraee Yazdi](https://omid.bio/).
-
+This is an educational project
 ## Getting Started
 
 First, install the dependencies:
